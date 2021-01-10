@@ -3846,6 +3846,12 @@ int mbedtls_ssl_generate_early_data_keys( mbedtls_ssl_context *ssl,
     MBEDTLS_SSL_DEBUG_MSG( 2, ( "=> mbedtls_ssl_generate_early_data_keys" ) );
 
     ciphersuite_info = ssl->handshake->ciphersuite_info;
+    if( ciphersuite_info == NULL )
+    {
+        MBEDTLS_SSL_DEBUG_MSG( 1, ( "cipher suite info not found" ) );
+        return( MBEDTLS_ERR_SSL_INTERNAL_ERROR );
+    }
+
     cipher_info = mbedtls_cipher_info_from_type( ciphersuite_info->cipher );
     if( cipher_info == NULL )
     {
