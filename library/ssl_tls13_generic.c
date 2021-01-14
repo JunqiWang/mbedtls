@@ -5251,6 +5251,7 @@ int mbedtls_ssl_write_early_data_ext( mbedtls_ssl_context *ssl,
     if( ssl->conf->endpoint == MBEDTLS_SSL_IS_CLIENT )
     {
         if( ssl->conf->key_exchange_modes == MBEDTLS_SSL_TLS13_KEY_EXCHANGE_MODE_ECDHE_ECDSA ||
+            mbedtls_ssl_get_psk( ssl, NULL, NULL ) != 0 ||
             ssl->conf->early_data == MBEDTLS_SSL_EARLY_DATA_DISABLED ) {
 
             MBEDTLS_SSL_DEBUG_MSG( 5, ( "<= skip write early_data extension" ) );
